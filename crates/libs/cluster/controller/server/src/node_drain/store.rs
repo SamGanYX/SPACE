@@ -550,28 +550,24 @@ async fn node_api_row(
     pool: &PgPool,
     node_id: NodeId,
 ) -> Result<Option<OwnedNodeApiTarget>, sqlx::Error> {
-    type Row = (NodeRole, NodeManagedBy, Option<String>, Option<String>);
+    type Row = (NodeRole, NodeManagedBy, Option<String>);
     let row: Option<Row> = sqlx::query_as(sql!(
         "SELECT n.role,
                 n.managed_by,
-                nd.node_api_endpoint AS direct_endpoint,
                 nk.k8s_node_name AS substrate_node_id
            FROM nodes n
-           LEFT JOIN node_direct nd ON nd.node_id = n.id
            LEFT JOIN node_k8s nk ON nk.node_id = n.id
           WHERE n.id = $1"
     ))
     .bind(node_id)
     .fetch_optional(pool)
     .await?;
-    Ok(row.map(
-        |(role, managed_by, direct_endpoint, substrate_node_id)| OwnedNodeApiTarget {
-            managed_by,
-            role,
-            direct_endpoint,
-            substrate_node_id,
-        },
-    ))
+    Ok(row.map(|(role, managed_by, substrate_node_id)| OwnedNodeApiTarget {
+        managed_by,
+        role,
+        direct_endpoint: None,
+        substrate_node_id,
+    }))
 }
 
 async fn revert_evacuation_suspend_claim(

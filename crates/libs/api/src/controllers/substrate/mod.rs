@@ -2148,12 +2148,12 @@ async fn enqueue_artifact_backup_via_retrying_node_api(
 }
 
 /// **Known cost, deliberately left.** Both callers resolve a `NodeApiTarget`
-/// from a three-table join before calling in, and the cached client is returned
+/// from a two-table join before calling in, and the cached client is returned
 /// before that target is read — so on every call after the first for a node, the
 /// join was paid for nothing. Making the target lazy would fix it, and would
 /// also route the lookup's failure through one channel instead of the two the
 /// callers classify it into today (`Publish` vs `Lookup`, which is the `phase`
-/// tag on `node_drain.failures`). Left because the cost is three primary-key
+/// tag on `node_drain.failures`). Left because the cost is two primary-key
 /// lookups on small tables, incurred only while a drain is in flight, and the
 /// fix touches every caller including the pre-existing suspend path. Revisit if
 /// the lookup ever grows anything that is not a PK read.

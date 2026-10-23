@@ -109,9 +109,7 @@ For new work:
   an existing query that already joins them rather than adding a join.
   archcheck's `pattern_ratchet.direct_tables` rule enforces this (advisory
   today).
-- Existing Direct-table joins in shared code and `Unsupported` trait
-  defaults (`list_pool_configs`, `upsert_pool_config`,
-  `disable_pool_config`) are debt, not precedent.
+- Existing Direct-table joins in shared code are debt, not precedent.
 
 ## Tests
 

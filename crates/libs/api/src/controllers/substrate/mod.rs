@@ -1688,32 +1688,17 @@ pub trait SubstrateAdapter: Send + Sync {
             .await
     }
 
-    async fn list_pool_configs(&self) -> Result<Vec<ClusterPoolConfigResponse>, ControllerError> {
-        Err(SubstrateError::Unsupported {
-            message: "cluster pools are not supported by this substrate".to_string(),
-        }
-        .into())
-    }
+    async fn list_pool_configs(&self) -> Result<Vec<ClusterPoolConfigResponse>, ControllerError>;
 
     async fn upsert_pool_config(
         &self,
-        _request: ClusterPoolConfigRequest,
-    ) -> Result<ClusterPoolConfigResponse, ControllerError> {
-        Err(SubstrateError::Unsupported {
-            message: "cluster pools are not supported by this substrate".to_string(),
-        }
-        .into())
-    }
+        request: ClusterPoolConfigRequest,
+    ) -> Result<ClusterPoolConfigResponse, ControllerError>;
 
     async fn disable_pool_config(
         &self,
-        _id: Uuid,
-    ) -> Result<ClusterPoolConfigResponse, ControllerError> {
-        Err(SubstrateError::Unsupported {
-            message: "cluster pools are not supported by this substrate".to_string(),
-        }
-        .into())
-    }
+        id: Uuid,
+    ) -> Result<ClusterPoolConfigResponse, ControllerError>;
 
     /// Resolve the node-api gRPC endpoint (`host:port`) for a node row.
     ///
@@ -1729,11 +1714,7 @@ pub trait SubstrateAdapter: Send + Sync {
     /// substrate's placement and readiness policy.
     async fn select_ready_worker_node_api_target(
         &self,
-    ) -> Result<OwnedNodeApiTarget, SubstrateError> {
-        Err(SubstrateError::Unsupported {
-            message: "ready worker selection is not supported by this substrate".to_string(),
-        })
-    }
+    ) -> Result<OwnedNodeApiTarget, SubstrateError>;
 
     /// Substrate-synthesized inventory. The direct substrate returns `None`
     /// (the database is the source of truth); substrates that own their own

@@ -87,7 +87,7 @@ use super::{
 };
 use crate::controllers::auto_lifecycle::policy_to_proto;
 use crate::controllers::{ControllerError, db_contention_error};
-use crate::models::Sandbox;
+use crate::models::{ClusterPoolConfigRequest, ClusterPoolConfigResponse, Sandbox};
 
 fn network_policy_to_proto(policy: &NetworkPolicyV1) -> NetworkPolicyProto {
     NetworkPolicyProto::from(policy)
@@ -4255,6 +4255,33 @@ impl SubstrateAdapter for DirectSubstrate {
                 "builder node {node_id} is not reachable: {error}"
             ))
         })
+    }
+
+    async fn list_pool_configs(&self) -> Result<Vec<ClusterPoolConfigResponse>, ControllerError> {
+        Err(SubstrateError::Unsupported {
+            message: "cluster pools are not supported by this substrate".to_string(),
+        }
+        .into())
+    }
+
+    async fn upsert_pool_config(
+        &self,
+        _request: ClusterPoolConfigRequest,
+    ) -> Result<ClusterPoolConfigResponse, ControllerError> {
+        Err(SubstrateError::Unsupported {
+            message: "cluster pools are not supported by this substrate".to_string(),
+        }
+        .into())
+    }
+
+    async fn disable_pool_config(
+        &self,
+        _id: Uuid,
+    ) -> Result<ClusterPoolConfigResponse, ControllerError> {
+        Err(SubstrateError::Unsupported {
+            message: "cluster pools are not supported by this substrate".to_string(),
+        }
+        .into())
     }
 
     async fn resolve_node_api_endpoint(

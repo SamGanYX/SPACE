@@ -1120,10 +1120,36 @@ impl SubstrateAdapter for RetryingPoolSubstrate {
         }
     }
 
+    async fn list_pool_configs(
+        &self,
+    ) -> Result<Vec<crate::models::ClusterPoolConfigResponse>, ControllerError> {
+        panic!("unused")
+    }
+
+    async fn upsert_pool_config(
+        &self,
+        _request: crate::models::ClusterPoolConfigRequest,
+    ) -> Result<crate::models::ClusterPoolConfigResponse, ControllerError> {
+        panic!("unused")
+    }
+
+    async fn disable_pool_config(
+        &self,
+        _id: uuid::Uuid,
+    ) -> Result<crate::models::ClusterPoolConfigResponse, ControllerError> {
+        panic!("unused")
+    }
+
     async fn resolve_node_api_endpoint(
         &self,
         _target: &NodeApiTarget<'_>,
     ) -> Result<String, SubstrateError> {
+        panic!("unused")
+    }
+
+    async fn select_ready_worker_node_api_target(
+        &self,
+    ) -> Result<crate::controllers::substrate::OwnedNodeApiTarget, SubstrateError> {
         panic!("unused")
     }
 
@@ -1271,10 +1297,36 @@ impl SubstrateAdapter for NodeRpcStubbedKubernetes {
         panic!("unused")
     }
 
+    async fn list_pool_configs(
+        &self,
+    ) -> Result<Vec<crate::models::ClusterPoolConfigResponse>, ControllerError> {
+        panic!("unused")
+    }
+
+    async fn upsert_pool_config(
+        &self,
+        _request: crate::models::ClusterPoolConfigRequest,
+    ) -> Result<crate::models::ClusterPoolConfigResponse, ControllerError> {
+        panic!("unused")
+    }
+
+    async fn disable_pool_config(
+        &self,
+        _id: uuid::Uuid,
+    ) -> Result<crate::models::ClusterPoolConfigResponse, ControllerError> {
+        panic!("unused")
+    }
+
     async fn resolve_node_api_endpoint(
         &self,
         _target: &NodeApiTarget<'_>,
     ) -> Result<String, SubstrateError> {
+        panic!("unused")
+    }
+
+    async fn select_ready_worker_node_api_target(
+        &self,
+    ) -> Result<crate::controllers::substrate::OwnedNodeApiTarget, SubstrateError> {
         panic!("unused")
     }
 

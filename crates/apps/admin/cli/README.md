@@ -6,10 +6,10 @@ warm pools, and build system templates without hand-crafting `curl` calls.
 
 ```text
 space-admin-cli login [--print-token] [--api-url URL] [--auth-url URL] [--email EMAIL] [--password-stdin]
-space-admin-cli template build seed [--force] [--publish-tag latest] [--async]
-space-admin-cli template build code-runtime [--base seed@sha256:...] [--force] [--publish-tag latest] [--async]
+space-admin-cli template build seed [--publish-tag latest] [--async]
+space-admin-cli template build code-runtime [--base seed@sha256:...] [--publish-tag latest] [--async]
 space-admin-cli template status <seed|code-runtime> <job-id>
-space-admin-cli drain-node     <node> [--forced] [--no-replace-after-terminate]
+space-admin-cli drain-node     <node> [--forced] [--no-replace-after-terminate]   POST /admin/api/v1/nodes/{node}:drain
 space-admin-cli terminate-node <node>          POST /admin/api/v1/nodes/{node}:terminate
 space-admin-cli undrain-node   <node>          POST /admin/api/v1/nodes/{node}:undrain
 space-admin-cli list-nodes [--drain-phase X] [--role X] [--include-deleted] [--sort <name|drainability>] [--long-runner-age-hours N] [-v|--verbose] [--json]
@@ -144,7 +144,6 @@ fail immediately; build submission itself is not retried.
 `--publish-tag latest` explicitly promotes the published release. Without it,
 only the immutable digest tag is published. `--base seed@sha256:...` pins the
 seed for code-runtime; otherwise the API resolves `seed:latest` before dispatch.
-`--force` rebuilds even when the resolved digest is already published.
 There is no local-recipe or internal-gRPC fallback.
 
 Follow the [system-template release procedure](../../../../templates/firecracker/seed/README.md#build-and-publish-system-templates)
